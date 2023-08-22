@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+  <head>
+      <title></title>
+      <link rel="stylesheet" href="CSS/stylesheet.css">
+      <link rel="stylesheet" href="CSS/animate.css">
+  		<link rel="stylesheet" href="CSS/component.css">
+      <link rel="stylesheet" href="fonts/icons/css/font-awesome.css">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+  </head>
+
+  <body>
+    <section>
+        <nav id="navigation"><a aria-label="mobile menu" class="nav-toggle"><span></span><span></span><span></span></span></span></a>
+            <ul class="menu-left">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="portfolio.html">Portfolio</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="clearfix"></div>
+        </nav>
+
+        <article>
+          <div id="about">
+            <h3 class="animated slideInUp">About Me</h3><br>
+            <p class="animated slideInUp">
+              Welcome to my digital canvas, where colors, shapes, and imagination come together to tell captivating visual stories.
+              I'm Graphic Designer, and my passion lies in creating eye-catching designs that leave a lasting impression.
+              <br><br>
+              With a keen eye for detail and a deep appreciation for aesthetics,
+              I specialize in turning ideas into stunning visuals. From crafting compelling logos that embody brand identities to
+              designing engaging marketing materials that communicate messages effectively,
+              I'm here to add that extra layer of creativity to your projects.
+              <br><br>
+              My journey as a graphic designer has been a journey of exploration and growth. Armed with a toolbox filled with Logo and Flyer design,
+              I thrive on transforming concepts into visual realities that resonate with audiences.
+              Each design is not just about aesthetics; it's about conveying emotions, sparking conversations, and making a statement.
+              <br><br>
+              Feel free to dive into my portfolio, where each project is a testament to my commitment to excellence and innovation.
+              Whether you're seeking a design partner for your business or curious about the creative journey, I'm here to collaborate and bring your ideas to life.
+              Let's embark on a visual adventure together. Ready to create something extraordinary? Let's connect!
+            </p><br><br>
+
+            <h3 class="animated slideInUp">My Education</h3><br>
+            <p class="animated slideInUp">
+              Akwamuman Senior High School <br> General Arts (2012 - 2015)
+              <br><br>
+              Ghana Korea Germany Church Mission Computer Training School <br> Web Design & Development (2015 - 2016)
+              <br><br>
+              Koforidua Technical University <br> Computer Networking Management (2021 - 2023)
+            </p>
+          </div>
+        </article>
+
+        <footer class="animated slideInUp">
+          <p>&copy Copyright 2023</p>
+        </footer>
+    </section>
+  </body>
+</html>
+
+<script src="js/jquery-1.11.3.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script>
+// back to top
+$('.logo').on('click', function(e) {
+  e.preventDefault();
+  $('.nav-toggle').removeClass('open');
+  $('.menu-left').removeClass('collapse');
+  $('html, body').animate({
+    scrollTop: 0
+  }, 750, 'easeInOutQuad')
+});
+
+// smooth scroll between sections
+$('a[href^="#"]').on('click', function(event) {
+
+  var $target = $(this.getAttribute('href'));
+
+  if($target.length) {
+    event.preventDefault();
+    $('html, body').stop().animate({
+      scrollTop: $target.offset().top
+    }, 750, 'easeInOutQuad');
+  }
+});
+
+// TOGGLE HAMBURGER & COLLAPSE NAV
+$('.nav-toggle').on('click', function() {
+  $(this).toggleClass('open');
+  $('.menu-left').toggleClass('collapse');
+});
+// REMOVE X & COLLAPSE NAV ON ON CLICK
+$('.menu-left a').on('click', function() {
+  $('.nav-toggle').removeClass('open');
+  $('.menu-left').removeClass('collapse');
+});
+
+// SHOW/HIDE NAV
+
+// Hide Header on on scroll down
+var didScroll;
+var lastScrollTop = 0;
+var delta = 5;
+var navbarHeight = $('header').outerHeight();
+
+$(window).scroll(function(event){
+    didScroll = true;
+});
+
+setInterval(function() {
+    if (didScroll) {
+        hasScrolled();
+        didScroll = false;
+    }
+}, 250);
+
+function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    // Make sure they scroll more than delta
+    if(Math.abs(lastScrollTop - st) <= delta)
+        return;
+
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (st > lastScrollTop && st > navbarHeight){
+        // Scroll Down
+        $('header').removeClass('show-nav').addClass('hide-nav');
+        $('.nav-toggle').removeClass('open');
+        $('.menu-left').removeClass('collapse');
+    } else {
+        // Scroll Up
+        if(st + $(window).height() < $(document).height()) {
+            $('header').removeClass('hide-nav').addClass('show-nav');
+        }
+    }
+
+    lastScrollTop = st;
+}
+</script>
+
+<script type="text/javascript">
+		$(document).ready(function() {
+			//Quotes rotator
+			var divs = $('.cbp-qtcontent');
+
+			function fade() {
+				var current = $('.current');
+				var currentIndex = divs.index(current),
+					nextIndex = currentIndex + 1;
+
+				if (nextIndex >= divs.length) {
+					nextIndex = 0;
+				}
+
+				var next = divs.eq(nextIndex);
+
+				next.stop().fadeIn(1500, function() {
+					$(this).addClass('current');
+				});
+
+				current.stop().fadeOut(1500, function() {
+					$(this).removeClass('current');
+					_startProgress()
+					setTimeout(fade, 8000);
+				});
+			}
+
+			function _startProgress(){
+				$(".cbp-qtprogress").removeAttr('style');
+				$(".cbp-qtprogress").animate({
+					width:"100%",
+				} , 8000);
+			}
+
+			_startProgress()
+			setTimeout(fade, 8000);
+		});
+	</script>
